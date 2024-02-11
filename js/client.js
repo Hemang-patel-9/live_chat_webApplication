@@ -1,5 +1,6 @@
+console.log("you have to manually start the serve");
+console.log("goto projectName > nodeServer.\nnow run command \" nodemon \"")
 const socket = io("http://localhost:8000");
-
 var audio = new Audio("ting.mp3");
 const form = document.getElementById("send-container");
 const messageInput = document.getElementById('messageInp');
@@ -14,7 +15,12 @@ const appendDiv = (message,position)=>{
 	messageContainer.append(msgele);
 	if(position=="left")
 	{
+		msgele.style.color="white";
 		audio.play();
+	}
+	else
+	{
+		msgele.style.color="white";
 	}
 }
 form.addEventListener("submit",(e)=>{
@@ -27,11 +33,19 @@ form.addEventListener("submit",(e)=>{
 socket.emit("new-user-joined",name);
 
 socket.on("user-joined",(name)=>{
-	appendDiv(`${name} joined the chat`,'right');
+	appendDiv(`${name??"someone"} joined the chat`,'center');
 });
 socket.on("receive",(data)=>{
-	appendDiv(`${data.name}:${data.message}`,'left');
+	appendDiv(`${data.name}: ${data.message}`,'left');
 });
 socket.on("left",(data)=>{
-	appendDiv(`${data.name} Left the Chat`,'left');
+	appendDiv(`${data.name??"someone"} Left the Chat`,'center');
+});
+
+
+//just js
+document.getElementById("leave").addEventListener("click",()=>
+{
+	alert("called");
+	window.location.href="https://www.google.com";
 });
