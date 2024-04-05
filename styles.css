@@ -45,7 +45,7 @@ body {
 	color: white;
 	height: 50%;
 	width: 8%;
-	font-size: 20px;
+	font-size: 15px;
 	padding: 5px 10px;
 	margin: 4px 30px 4px;
 }
@@ -59,7 +59,13 @@ body {
 	text-align: center;
 	font-size: 26px;
 }
-
+::-webkit-scrollbar-track
+{
+	width: 10px;
+}
+::-webkit-scrollbar-thumb {
+	width: 10px;
+}
 .header .title span {
 	font-size: 15px;
 }
@@ -93,6 +99,7 @@ body {
 }
 .container .center
 {
+	font-size: 14px;
 	width: 18%;
 	background-color: rgb(36, 36, 36);
 	text-align: center;

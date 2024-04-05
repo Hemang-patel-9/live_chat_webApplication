@@ -1,10 +1,14 @@
-const io = require("socket.io")(8000,{
+const express = require("express");
+const app = express();
+var http = require("http").Server(app);
+const io = require("socket.io")(http,{
 	cors:
 	{
 		origin:"*",
 	},
 });
 const users = {};
+
 io.on("connection",(socket)=>{
 	socket.on("new-user-joined",(name)=>{
 		users[socket.id] = name;
@@ -18,3 +22,10 @@ io.on("connection",(socket)=>{
 		delete users[socket.id];
 	});
 });
+app.get("/",(req,res)=>{
+	res.send("<h1>Group chat application.</h1>");
+});
+http.listen(8888, () => {
+	console.log("Server connect on port 8888");
+})
+
